@@ -1,27 +1,30 @@
-﻿using ConApp.Model;
-using System;
+﻿using ConApp.Helper;
+using ConApp.Model;
+using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace ConApp;
 public static class JsonInvalid
 {
-    public static bool ReadInvalidJsonFromStream()
+    public static bool ReadInvalidJsonFromStream(string myFaultyJsonFile)
     {
         bool result = false;
-        var _ = new
-        JsonSerializerOptions()
+
+        string jsonString = File.ReadAllText(myFaultyJsonFile);
+
+
+        JsonSerializerOptions options = new() 
         {
             AllowTrailingCommas = true,
-            ReadCommentHandling = JsonCommentHandling.Skip,
-            NumberHandling = JsonNumberHandling.AllowReadingFromString
+            ReadCommentHandling = JsonCommentHandling.Skip
         };
 
-        WeatherForecast weatherForecast = new(DateTime.Parse("2023-11-27"), 2, "Cold");
-        var jsonString = JsonSerializer.Serialize(weatherForecast);
+        // Retrieve the cached JsonSerializeOptions instance
+        JsonSerializerOptions cachedOptions = JsonSerializeOptionsCache.GetOrAdd("myKey", options);
 
-        if (string.IsNullOrEmpty(jsonString))
-            result = true;
-        return result;
+
+        var data = JsonSerializer.Deserialize<WeatherForecast>(jsonString, cachedOptions);
+
+        return data is not null || result;
     }   
 }

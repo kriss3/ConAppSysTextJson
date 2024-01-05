@@ -1,5 +1,5 @@
-﻿using ConApp.Model;
-using System;
+﻿using ConApp.Helper;
+using ConApp.Model;
 using System.IO;
 using System.Text.Json;
 
@@ -18,7 +18,9 @@ public static class JsonReader
             ReadCommentHandling = JsonCommentHandling.Skip
         };
 
-        WeatherForecast? data = JsonSerializer.Deserialize<WeatherForecast>(jsonString, options);
+        JsonSerializerOptions cachedOptions = JsonSerializeOptionsCache.GetOrAdd("myKey", options);
+
+        WeatherForecast? data = JsonSerializer.Deserialize<WeatherForecast>(jsonString, cachedOptions);
 
         return data is not null || result;
     }
