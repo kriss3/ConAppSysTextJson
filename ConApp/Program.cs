@@ -1,17 +1,14 @@
-﻿using System;
-using System.Text.Json;
+﻿using ConApp;
 using static System.Console;
 
-WriteLine("Welcome to JSON using STO");
+WriteLine("Welcome to JSON using S.T.J.");
 
-//string fileName = "WeatherForecast.json";
+string fileNameToOperate = "WeatherForecast.json";
 
-WeatherForecast weatherForecast = 
-    new(DateTime.Parse("2023-11-27"), 2, "Cold");
+var _ = JsonWriter.WriteToJsonFile(fileNameToOperate);
 
-var jsonString = JsonSerializer.Serialize<WeatherForecast>(weatherForecast);
+//TO-DO => Check if file exists before reading...
+var __ = JsonReader.ReadJsonFromStream(fileNameToOperate);
 
-WriteLine(jsonString);
-
-public record WeatherForecast(DateTimeOffset Date, int TemperatureCelsius, string? Summary);
+WriteLine("Done!!");
 
