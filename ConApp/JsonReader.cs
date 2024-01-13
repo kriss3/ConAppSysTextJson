@@ -36,13 +36,31 @@ public static class JsonReader
             WindSpeed = 30,
         };
 
+        //TO-DO: reuse caching implemented in the Helper folder
         JsonSerializerOptions serializeOption = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             WriteIndented = true,
         };
 
-        var jsonResult = JsonSerializer.Serialize(weatherForecast);
-        return true;
+        JsonSerializerOptions serializeOptions_v2 = new()
+        {
+            PropertyNamingPolicy = new MakeAllCapsJsonPolicy(),
+            WriteIndented = true,
+        };
+
+        var jsonResult = JsonSerializer.Serialize(weatherForecast, serializeOption);
+
+        var jsonResult_v2 = JsonSerializer.Serialize(weatherForecast, serializeOptions_v2);
+
+        return string.IsNullOrEmpty(jsonResult);
+    }
+}
+
+public class MakeAllCapsJsonPolicy : JsonNamingPolicy
+{
+    public override string ConvertName(string name)
+    {
+        return name.ToUpper();
     }
 }
