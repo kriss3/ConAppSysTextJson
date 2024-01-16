@@ -7,7 +7,7 @@ using System.Text.Json;
 namespace ConApp;
 public static class JsonReader
 {
-    public static bool ReadJsonFromStream(string myJsonFile) 
+    public static bool ReadJsonFromStream(string myJsonFile)
     {
         bool result = false;
 
@@ -26,7 +26,7 @@ public static class JsonReader
         return data is not null || result;
     }
 
-    public static bool ReadJsonWithAnnotations(string myJsonFile) 
+    public static bool ReadJsonWithAnnotations(string myJsonFile)
     {
         WeatherForecast_v2 weatherForecast = new()
         {
@@ -54,6 +54,28 @@ public static class JsonReader
         var jsonResult_v2 = JsonSerializer.Serialize(weatherForecast, serializeOptions_v2);
 
         return string.IsNullOrEmpty(jsonResult);
+    }
+
+    public static bool ReadMonkeyDataSubsetFromStream(string monkeyJson)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(monkeyJson, nameof(monkeyJson));
+        bool result = false; // this might be a.k.a sentinel patterns: everything is false until it is true;
+
+        var jsonData = File.ReadAllText(monkeyJson);
+
+        JsonSerializerOptions options = new()
+        {
+            AllowTrailingCommas = true,
+            ReadCommentHandling = JsonCommentHandling.Skip
+        };
+
+        JsonSerializerOptions monkeyJsonOption = JsonSerializeOptionsCache.GetOrAdd("monkeyDataSubset", options);
+
+        //TO-DO: validate the model
+        //TO-DO: test the deserialized data returned from the stream
+        Monkey? monkeyData = JsonSerializer.Deserialize<Monkey>(jsonData, monkeyJsonOption);
+
+        return monkeyData is not null || result;
     }
 }
 
