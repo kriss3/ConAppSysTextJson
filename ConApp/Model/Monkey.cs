@@ -1,5 +1,15 @@
 ﻿
+using System.Collections.Generic;
+
 namespace ConApp.Model;
+
+
+public record MonkeyAggr 
+{
+    public string? Source { get; init; }
+    public IEnumerable<Monkey> Monkeys { get; init; } = new List<Monkey>();
+}
+
 public record Monkey
 {
     public string? Name { get; init; }

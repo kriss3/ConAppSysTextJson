@@ -73,7 +73,7 @@ public static class JsonReader
 
         //TO-DO: validate the model
         //TO-DO: test the deserialized data returned from the stream
-        Monkey? monkeyData = JsonSerializer.Deserialize<Monkey>(jsonData, monkeyJsonOption);
+        MonkeyAggr? monkeyData = JsonSerializer.Deserialize<MonkeyAggr>(jsonData, monkeyJsonOption);
 
         return monkeyData is not null || result;
     }
