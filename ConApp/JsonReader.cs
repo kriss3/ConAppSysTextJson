@@ -3,6 +3,7 @@ using ConApp.Model;
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ConApp;
 public static class JsonReader
@@ -68,6 +69,17 @@ public static class JsonReader
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip
         };
+
+        // Default JsonSerializerOptions:
+        JsonSerializerOptions defaultJsonSerializerOptions = new() 
+        {
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+        };
+
+        // Option to use defaults by using JsonSerializerDefaults with 2 available options: Web, General
+        JsonSerializerOptions defaultJsonSerializerWithCtor = new(JsonSerializerDefaults.Web);
 
         JsonSerializerOptions monkeyJsonOption = JsonSerializeOptionsCache.GetOrAdd("monkeyDataSubset", options);
 
