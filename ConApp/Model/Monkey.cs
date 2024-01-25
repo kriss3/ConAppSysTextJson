@@ -1,7 +1,9 @@
 ﻿
 using System.Collections.Generic;
+using Functional;
 
 namespace ConApp.Model;
+
 
 
 public record MonkeyAggr 
@@ -12,7 +14,7 @@ public record MonkeyAggr
 
 public record Monkey
 {
-    public string? Name { get; init; }
+    public Name? Name { get; init; }
     public string? Location { get; init; }
     public string? Details { get; init; }
     public string? Image { get; init; }
@@ -20,3 +22,25 @@ public record Monkey
     public float? Latitude { get; init; }
     public float? Longitude { get; init; }
 }
+
+
+public record Name
+{
+    private string _value;
+
+    private Name(string value)
+    {
+        _value = value;
+    }
+
+    public static Option<Name> Create(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            throw new ArgumentException("Name cannot be null or empty.");
+        }
+
+        return new Name(value);
+    }
+}
+
