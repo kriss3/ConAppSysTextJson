@@ -1,4 +1,6 @@
-﻿namespace ConAppGetDataFromTheWeb;
+﻿using System.Text.Json.Serialization;
+
+namespace ConAppGetDataFromTheWeb;
 public class Monkey
 {
     public string? Name { get; set; }
@@ -9,3 +11,6 @@ public class Monkey
     public double Latitude { get; set; }
     public double Longitude { get; set; }
 }
+
+[JsonSerializable(typeof(List<Monkey>))]
+internal sealed partial class MonkeyContext : JsonSerializerContext { }
