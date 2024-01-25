@@ -5,9 +5,11 @@ using System.Text.Json;
 
 WriteLine("Get Monkeys from Internet!");
 
-List<Monkey> monkeyList;
+List<Monkey> monkeyList = [];
 
-monkeyList = await GetMonkeys();
+_ = await GetMonkeys();
+_ = await GetMonkeys_v2();
+
 
 async Task<List<Monkey>> GetMonkeys() 
 {
@@ -31,7 +33,7 @@ async Task<List<Monkey>> GetMonkeys_v2()
     //I don't want to de-serialize if I don't have a successful response
     if (request.IsSuccessStatusCode)
     {
-        var monkeyList = await request.Content.ReadFromJsonAsync<List<Monkey>>();
+        monkeyList = await request.Content.ReadFromJsonAsync<List<Monkey>>() ?? [];
     }
     else 
     {
