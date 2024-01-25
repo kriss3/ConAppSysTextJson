@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34407.89
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConApp", "ConApp\ConApp.csproj", "{721FC09F-B4A2-497B-8E8D-11E9F4E52BB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConApp", "ConApp\ConApp.csproj", "{721FC09F-B4A2-497B-8E8D-11E9F4E52BB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConAppGetDataFromTheWeb", "ConAppGetDataFromTheWeb\ConAppGetDataFromTheWeb.csproj", "{4EB12D97-236F-42F8-9661-1694F256D92B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{721FC09F-B4A2-497B-8E8D-11E9F4E52BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{721FC09F-B4A2-497B-8E8D-11E9F4E52BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{721FC09F-B4A2-497B-8E8D-11E9F4E52BB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EB12D97-236F-42F8-9661-1694F256D92B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EB12D97-236F-42F8-9661-1694F256D92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EB12D97-236F-42F8-9661-1694F256D92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EB12D97-236F-42F8-9661-1694F256D92B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
