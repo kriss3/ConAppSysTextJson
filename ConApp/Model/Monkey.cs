@@ -26,7 +26,8 @@ public record Monkey
 
 public record Name
 {
-    private string _value;
+    private readonly string _value;
+    public string Value => _value; 
 
     private Name(string value)
     {
